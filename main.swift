@@ -4,7 +4,9 @@ enum Expression {
         case number(Int)
 }
 
+struct FloatingLiteral {}
 struct MdlVersion {
+        let x: FloatingLiteral
 }
 
 let parser = MdlParser()

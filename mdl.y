@@ -13,7 +13,7 @@
 %nonterminal_type       root                    MdlVersion
 %nonterminal_type       mdl                     MdlVersion
 %nonterminal_type       mdl_version             MdlVersion
-%nonterminal_type       floating_literal        MdlVersion
+%nonterminal_type       floating_literal        FloatingLiteral
 
 root            ::= mdl(a). {
                         return a
@@ -24,9 +24,9 @@ mdl             ::= mdl_version(a). {
                 }
 
 mdl_version     ::= KeywordMdl floating_literal(a) KeywordSemicolon. {
-                        return a
+                        return MdlVersion(x: a)
                 }
 
 floating_literal        ::= Integer KeywordDot Integer. {
-                        return MdlVersion()
+                        return FloatingLiteral()
                 }

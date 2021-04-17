@@ -4,6 +4,9 @@ enum Expression {
         case number(Int)
 }
 
+struct MdlVersion {
+}
+
 let parser = MdlParser()
 
 typealias TokenData = (token: MdlParser.CitronToken, code: MdlParser.CitronTokenCode)
@@ -11,10 +14,15 @@ typealias TokenData = (token: MdlParser.CitronToken, code: MdlParser.CitronToken
 let lexer = CitronLexer<TokenData>(
         rules: [
 
+                // Keywords
+                .string("mdl"   , (.keyword, .KeywordMdl)),
+                .string("."     , (.keyword, .KeywordDot)),
+                .string(";"     , (.keyword, .KeywordSemicolon)),
+
                 // Numbers
                 .regexPattern("[0-9]+", { str in
                         if let number = Int(str) {
-                                return (number, .Integer)
+                                return (.integer(number), .Integer)
                         }
                         return nil
                 }),

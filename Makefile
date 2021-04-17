@@ -16,3 +16,6 @@ edit:
 	#vi mdl.y
 	vi main.swift
 
+c: clean
+clean:
+	rm -f mdl mdl.swift

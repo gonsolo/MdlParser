@@ -1,14 +1,21 @@
 %class_name MdlParser
 
-%token_type Int
-
-%nonterminal_type       root    Expression
-%nonterminal_type       mdl     Expression
-
-root ::= mdl(a). {
-        return a
+%preface {
+        enum Token {
+                case keyword            // mdl
+                case punctuation        // .
+                case integer(Int)
+        }
 }
 
-mdl ::= Integer(a). {
-        return .number(a)
-}
+%token_type Token
+
+%nonterminal_type       root            MdlVersion
+%nonterminal_type       mdl             MdlVersion
+%nonterminal_type       mdl_version     MdlVersion
+
+root            ::= mdl(a).             { return a }
+mdl             ::= mdl_version(a).     { return a }
+mdl_version     ::= KeywordMdl Integer KeywordDot Integer KeywordSemicolon. {
+                        return MdlVersion()
+                }

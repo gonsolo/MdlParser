@@ -8,8 +8,19 @@ let parser = MdlParser()
 
 typealias TokenData = (token: MdlParser.CitronToken, code: MdlParser.CitronTokenCode)
 
-let lexer = CitronLexer<TokenData>(rules: [
+let lexer = CitronLexer<TokenData>(
+        rules: [
 
+                // Numbers
+                .regexPattern("[0-9]+", { str in
+                        if let number = Int(str) {
+                                return (number, .Integer)
+                        }
+                        return nil
+                }),
+
+                // Whitespace
+                .regexPattern("\\s", { _ in nil })
         ])
 
 guard CommandLine.argc == 2 else {

@@ -1,8 +1,11 @@
 CITRON		= ../../src/citron
 CITRON_SOURCE	= $(CITRON)/src
 
+INPUT		= test.mdl
+#INPUT		= gun_metal.mdl
+
 run: mdl
-	./mdl gun_metal.mdl
+	./mdl $(INPUT)
 mdl: $(CITRON_SOURCE)/CitronParser.swift $(CITRON_SOURCE)/CitronLexer.swift mdl.swift main.swift
 	swiftc $^ -o $@
 mdl.swift: mdl.y

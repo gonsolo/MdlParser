@@ -5,7 +5,7 @@
 %nonterminal_type       root    Expression
 %nonterminal_type       mdl     Expression
 
-root ::= mdl. {
+root ::= mdl(a). {
         return a
 }
 

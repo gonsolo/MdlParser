@@ -1,5 +1,14 @@
+CITRON		= ../../src/citron
+CITRON_SOURCE	= $(CITRON)/src
+
+run: mdl
+	./mdl
+mdl: $(CITRON_SOURCE)/CitronParser.swift $(CITRON_SOURCE)/CitronLexer.swift mdl.swift main.swift
+	swiftc $^ -o $@
 mdl.swift: mdl.y
-	../../src/citron/bin/citron $<
+	$(CITRON)/bin/citron $<
+
 e: edit
 edit:
 	vi mdl.y
+

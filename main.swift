@@ -19,6 +19,9 @@ let lexer = CitronLexer<TokenData>(
                         return nil
                 }),
 
+                // Comments
+                .regexPattern("/[*]((.|\n)*?)[*]/", { _ in nil }),
+
                 // Whitespace
                 .regexPattern("\\s", { _ in nil })
         ])

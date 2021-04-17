@@ -10,5 +10,6 @@ mdl.swift: mdl.y
 
 e: edit
 edit:
-	vi mdl.y
+	#vi mdl.y
+	vi main.swift
 

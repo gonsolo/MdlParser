@@ -37,6 +37,7 @@
 %nonterminal_type       annotation              Dummy
 %nonterminal_type       qualifiedName           Dummy
 %nonterminal_type       literalExpression       Dummy
+%nonterminal_type       positionalArguments     Dummy
 %nonterminal_type       positionalArgument      Dummy
 
 root                    ::= mdl(a) . {
@@ -171,7 +172,15 @@ argumentList            ::= . {
                                 return Dummy()
                         }
 
-argumentList            ::= KeywordParenOpen positionalArgument KeywordParenClose . {
+argumentList            ::= KeywordParenOpen positionalArguments KeywordParenClose . {
+                                return Dummy()
+                        }
+
+positionalArguments     ::= positionalArgument . {
+                                return Dummy()
+                        }
+
+positionalArguments     ::= positionalArgument KeywordComma positionalArguments . {
                                 return Dummy()
                         }
 

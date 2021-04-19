@@ -4,8 +4,7 @@ enum Expression {
         case number(Int)
 }
 
-struct FloatingLiteral {}
-struct MdlVersion { let x: FloatingLiteral }
+struct MdlVersion { let x: Dummy }
 struct Import {}
 struct Dummy {}
 
@@ -29,6 +28,8 @@ let lexer = CitronLexer<TokenData>(
                 .string("(",            (.keyword, .KeywordParenOpen)),
                 .string(")",            (.keyword, .KeywordParenClose)),
                 .string("=",            (.keyword, .KeywordEquals)),
+                .string("[",            (.keyword, .KeywordBracketOpen)),
+                .string("]",            (.keyword, .KeywordBracketClose)),
 
                 // Numbers
                 //.regexPattern("[0-9]+", { str in
@@ -38,11 +39,17 @@ let lexer = CitronLexer<TokenData>(
                 //        return nil
                 //}),
 
+                // Float literal
                 .regexPattern("[0-9]+\\.[0-9]+", { str in
                         if let number = Float(str) {
                                 return (.float(number), .Float)
                         }
                         return nil
+                }),
+
+                // String literal
+                .regexPattern("\"[A-Za-z ]+\"", { str in
+                        return (.string(str), .String)
                 }),
 
                 // Identifiers

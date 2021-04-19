@@ -6,6 +6,7 @@
                 case punctuation        // .
                 case integer(Int)
                 case float(Float)
+                case string(String)
                 case identifier(String)
         }
 }
@@ -15,7 +16,8 @@
 %nonterminal_type       root                    MdlVersion
 %nonterminal_type       mdl                     MdlVersion
 %nonterminal_type       mdlVersion              MdlVersion
-%nonterminal_type       floatingLiteral         FloatingLiteral
+%nonterminal_type       floatingLiteral         Dummy
+%nonterminal_type       stringLiteral           Dummy
 %nonterminal_type       mdlImports              Import
 %nonterminal_type       mdlImport               Import
 %nonterminal_type       globalDeclaration       Dummy
@@ -30,6 +32,10 @@
 %nonterminal_type       postfixExpression       Dummy
 %nonterminal_type       primaryExpression       Dummy
 %nonterminal_type       argumentList            Dummy
+%nonterminal_type       annotationBlock         Dummy
+%nonterminal_type       annotationList          Dummy
+%nonterminal_type       annotation              Dummy
+%nonterminal_type       qualifiedName           Dummy
 
 root                    ::= mdl(a) . {
                                 return a
@@ -56,9 +62,12 @@ mdlImport               ::= KeywordImport KeywordColon KeywordColon Identifier K
                         }
 
 floatingLiteral        ::= Float . {
-                                return FloatingLiteral()
+                                return Dummy()
                         }
 
+stringLiteral            ::= String . {
+                                return Dummy()
+                        }
 
 globalDeclaration       ::= functionDeclaration . {
                                 return Dummy()
@@ -100,16 +109,29 @@ parameterList           ::= parameter . {
                                 return Dummy()
                         }
 
-parameter               ::= type simpleName KeywordEquals assignmentExpression . {
+parameter               ::= type simpleName KeywordEquals assignmentExpression annotationBlock . {
+                                return Dummy()
+                        }
+
+annotationBlock         ::= KeywordBracketOpen KeywordBracketOpen annotationList KeywordBracketClose KeywordBracketClose . {
+                                return Dummy()
+                        }
+
+annotationList          ::= annotation . {
+                                return Dummy()
+                        }
+
+annotation              ::= qualifiedName argumentList . {
+                                return Dummy()
+                        }
+
+qualifiedName           ::= simpleName KeywordColon KeywordColon simpleName . {
                                 return Dummy()
                         }
 
 assignmentExpression    ::= postfixExpression . {
                                 return Dummy()
                         }
-//assignmentExpression    ::= type KeywordParenOpen floatingLiteral KeywordParenClose . {
-//                                return Dummy()
-//                        }
 
 postfixExpression       ::= primaryExpression argumentList . {
                                 return Dummy()
@@ -122,3 +144,8 @@ primaryExpression       ::= simpleType . {
 argumentList            ::= KeywordParenOpen floatingLiteral KeywordParenClose . {
                                 return Dummy()
                         }
+
+argumentList            ::= KeywordParenOpen stringLiteral KeywordParenClose . {
+                                return Dummy()
+                        }
+

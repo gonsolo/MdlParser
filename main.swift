@@ -30,6 +30,12 @@ let lexer = CitronLexer<TokenData>(
                         return nil
                 }),
 
+                // Identifiers
+                .regexPattern("[a-zA-Z0-9_]+", { str in
+                        (.identifier(str), .Identifier)
+                }),
+
+
                 // Comments
                 .regexPattern("/[*]((.|\n)*?)[*]/", { _ in nil }),
 

@@ -35,7 +35,7 @@
 %nonterminal_type       assignmentExpression    Dummy
 %nonterminal_type       postfixExpression       Dummy
 %nonterminal_type       primaryExpression       Dummy
-//%nonterminal_type       argumentList            Dummy
+%nonterminal_type       argumentList            Dummy
 %nonterminal_type       annotationBlock         Dummy
 %nonterminal_type       annotationList          Dummy
 %nonterminal_type       annotation              Dummy
@@ -96,7 +96,7 @@ type                    ::= simpleType . {
                         }
 
 type                    ::= frequencyQualifier simpleType . {
-                                print("freq type")
+                                print("type freq simple type")
                                 return Dummy()
                         }
 
@@ -172,54 +172,61 @@ qualifiedName           ::= simpleName KeywordColon KeywordColon simpleName . {
                                 return Dummy()
                         }
 */
-//assignmentExpression    ::= postfixExpression . {
-assignmentExpression    ::= KeywordColor KeywordParenOpen floatingLiteral KeywordParenClose . {
+assignmentExpression    ::= postfixExpression . {
                                 print("assignmentExpression")
                                 return Dummy()
                         }
-//postfixExpression       ::= primaryExpression /* argumentList */ . {
-//                                print("postfix")
-//                                return Dummy()
-//                        }
-/*
-primaryExpression       ::= simpleType . {
-                                print("primary with simple type")
+postfixExpression       ::= primaryExpression . {
+                                print("postfix primary")
                                 return Dummy()
                         }
-*/
-//primaryExpression       ::= literalExpression . {
-//                                return Dummy()
-//                        }
-//
-//literalExpression       ::= floatingLiteral . {
-//                                return Dummy()
-//                        }
+
+postfixExpression       ::= primaryExpression argumentList . {
+                                print("postfix with argumentList")
+                                return Dummy()
+                        }
+
+primaryExpression       ::= simpleType . {
+                                print("primary simple type")
+                                return Dummy()
+                        }
+
+primaryExpression       ::= literalExpression . {
+                                print("primary literal")
+                                return Dummy()
+                        }
+
+literalExpression       ::= floatingLiteral . {
+                                print("literal float")
+                                return Dummy()
+                        }
 /*
 literalExpression       ::= stringLiteral . {
                                 return Dummy()
                         }
+*/
 argumentList            ::= KeywordParenOpen positionalArguments KeywordParenClose . {
                                 print("argumentList")
                                 return Dummy()
                         }
-
+/*
 argumentList            ::= . {
                                 print("empty argumentList")
                                 return Dummy()
                         }
+*/
 positionalArguments     ::= positionalArgument . {
-                                print("empty pos args")
+                                print("one pos args")
                                 return Dummy()
                         }
-
+/*
 positionalArguments     ::= positionalArgument KeywordComma positionalArguments . {
                                 print("non-empty pos args")
                                 return Dummy()
                         }
-
+*/
 positionalArgument      ::= assignmentExpression . {
+//positionalArgument      ::= floatingLiteral . {
                                 print("positionalArgument")
                                 return Dummy()
                         }
-*/
-

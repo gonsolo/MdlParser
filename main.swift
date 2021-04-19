@@ -30,6 +30,7 @@ let lexer = CitronLexer<TokenData>(
                 .string("=",            (.keyword, .KeywordEquals)),
                 .string("[",            (.keyword, .KeywordBracketOpen)),
                 .string("]",            (.keyword, .KeywordBracketClose)),
+                .string(",",            (.keyword, .KeywordComma)),
 
                 // Numbers
                 //.regexPattern("[0-9]+", { str in

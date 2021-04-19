@@ -121,6 +121,10 @@ annotationList          ::= annotation . {
                                 return Dummy()
                         }
 
+annotationList          ::= annotation KeywordComma annotationList . {
+                                return Dummy()
+                        }
+
 annotation              ::= qualifiedName argumentList . {
                                 return Dummy()
                         }

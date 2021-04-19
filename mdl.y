@@ -36,6 +36,7 @@
 %nonterminal_type       annotationList          Dummy
 %nonterminal_type       annotation              Dummy
 %nonterminal_type       qualifiedName           Dummy
+%nonterminal_type       literalExpression       Dummy
 
 root                    ::= mdl(a) . {
                                 return a
@@ -97,6 +98,10 @@ simpleType              ::= KeywordColor . {
                                 return Dummy()
                         }
 
+simpleType              ::= KeywordFloat . {
+                                return Dummy()
+                        }
+
 simpleName              ::= Identifier . {
                                 return Dummy()
                         }
@@ -146,6 +151,18 @@ postfixExpression       ::= primaryExpression argumentList . {
                         }
 
 primaryExpression       ::= simpleType . {
+                                return Dummy()
+                        }
+
+primaryExpression       ::= literalExpression . {
+                                return Dummy()
+                        }
+
+literalExpression       ::= floatingLiteral . {
+                                return Dummy()
+                        }
+
+argumentList            ::= . {
                                 return Dummy()
                         }
 

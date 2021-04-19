@@ -22,6 +22,7 @@ let lexer = CitronLexer<TokenData>(
                 .string("material",     (.keyword, .KeywordMaterial)),
                 .string("uniform",      (.keyword, .KeywordUniform)),
                 .string("color",        (.keyword, .KeywordColor)),
+                .string("float",        (.keyword, .KeywordFloat)),
                 .string(":",            (.keyword, .KeywordColon)),
                 .string(";",            (.keyword, .KeywordSemicolon)),
                 .string("*",            (.keyword, .KeywordAsterisk)),
@@ -41,7 +42,7 @@ let lexer = CitronLexer<TokenData>(
                 //}),
 
                 // Float literal
-                .regexPattern("[0-9]+\\.[0-9]+", { str in
+                .regexPattern("[0-9]*\\.[0-9]+", { str in
                         if let number = Float(str) {
                                 return (.float(number), .Float)
                         }

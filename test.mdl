@@ -40,7 +40,7 @@ export material gun_metal (
         anno::display_name("Base color"),
         anno::description("The base color of the material")
     ]],
-    uniform color base_color  = color(0.08) 
+    uniform float flake_amount        = .25
     [[ 
         anno::display_name("Flake Amount"),
         anno::description("The amount of metal flakes in the material")

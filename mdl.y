@@ -29,7 +29,7 @@ mdl_version     ::= KeywordMdl floating_literal(a) KeywordSemicolon. {
                         return MdlVersion(x: a)
                 }
 
-mdlImport          ::= KeywordImport KeywordColon KeywordColon Identifier. { // KeywordColon KeywordColon KeywordAsterisk KeywordSemicolon. {
+mdlImport          ::= KeywordImport KeywordColon KeywordColon Identifier KeywordColon KeywordColon KeywordAsterisk KeywordSemicolon. {
                         return Import()
                 }
 

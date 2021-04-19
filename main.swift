@@ -25,6 +25,8 @@ let lexer = CitronLexer<TokenData>(
                 .string(".",            (.keyword, .KeywordDot)),
                 .string(";",            (.keyword, .KeywordSemicolon)),
                 .string("*",            (.keyword, .KeywordAsterisk)),
+                .string("(",            (.keyword, .KeywordParenOpen)),
+                .string(")",            (.keyword, .KeywordParenClose)),
 
                 // Numbers
                 .regexPattern("[0-9]+", { str in

@@ -18,35 +18,40 @@
 %nonterminal_type       mdlImports              Import
 %nonterminal_type       mdlImport               Import
 %nonterminal_type       globalDeclaration       Dummy
+%nonterminal_type       functionDeclaration     Dummy
 
-root            ::= mdl(a) . {
-                        return a
-                }
+root                    ::= mdl(a) . {
+                                return a
+                        }
 
-mdl             ::= mdlVersion(a) mdlImports KeywordExport globalDeclaration . {
-                        return a
-                }
+mdl                     ::= mdlVersion(a) mdlImports KeywordExport globalDeclaration . {
+                                return a
+                        }
 
-mdlVersion     ::= KeywordMdl floatingLiteral(a) KeywordSemicolon . {
-                        return MdlVersion(x: a)
-                }
+mdlVersion              ::= KeywordMdl floatingLiteral(a) KeywordSemicolon . {
+                                return MdlVersion(x: a)
+                        }
 
-mdlImports      ::= . {
-                        return Import();
-                }
+mdlImports              ::= . {
+                                return Import();
+                        }
 
-mdlImports      ::= mdlImport mdlImports . {
-                        return Import()
-                }
+mdlImports              ::= mdlImport mdlImports . {
+                                return Import()
+                        }
 
-mdlImport       ::= KeywordImport KeywordColon KeywordColon Identifier KeywordColon KeywordColon KeywordAsterisk KeywordSemicolon . {
-                        return Import()
-                }
+mdlImport               ::= KeywordImport KeywordColon KeywordColon Identifier KeywordColon KeywordColon KeywordAsterisk KeywordSemicolon . {
+                                return Import()
+                        }
 
 floatingLiteral        ::= Integer KeywordDot Integer . {
-                        return FloatingLiteral()
-                }
+                                return FloatingLiteral()
+                        }
 
-globalDeclaration       ::= KeywordMaterial Identifier . {
-                        return Dummy()
-                }
+globalDeclaration       ::= functionDeclaration . {
+                                return Dummy()
+                        }
+
+functionDeclaration       ::= KeywordMaterial Identifier KeywordParenOpen KeywordParenClose . {
+                                return Dummy()
+                        }

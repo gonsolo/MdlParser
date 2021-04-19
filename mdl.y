@@ -22,6 +22,7 @@
 %nonterminal_type       mdlVersion              MdlVersion
 %nonterminal_type       floatingLiteral         Dummy
 %nonterminal_type       stringLiteral           Dummy
+%nonterminal_type       zeroOrMoreStringLiterals        Dummy
 %nonterminal_type       mdlImports              Import
 %nonterminal_type       mdlImport               Import
 %nonterminal_type       globalDeclaration       Dummy
@@ -75,11 +76,11 @@ floatingLiteral        ::= Float(a) . {
                                 print("floatingLiteral \(a)")
                                 return Dummy()
                         }
-/*
-stringLiteral            ::= String . {
+
+stringLiteral           ::= String . {
                                 return Dummy()
                         }
-*/
+
 globalDeclaration       ::= functionDeclaration . {
                                 print("globalDeclaration")
                                 return Dummy()
@@ -144,11 +145,11 @@ parameter               ::= type simpleName . {
                                 print("parameter")
                                 return Dummy()
                         }
-parameter               ::= type simpleName KeywordEquals assignmentExpression /* annotationBlock */ . {
+parameter               ::= type simpleName KeywordEquals assignmentExpression annotationBlock . {
                                 print("parameter =")
                                 return Dummy()
                         }
-/*
+
 annotationBlock         ::= KeywordBracketOpen KeywordBracketOpen annotationList KeywordBracketClose KeywordBracketClose . {
                                 return Dummy()
                         }
@@ -160,18 +161,17 @@ annotationList          ::= annotation . {
 annotationList          ::= annotation KeywordComma annotationList . {
                                 return Dummy()
                         }
-*/
-/*
+
 annotation              ::= qualifiedName argumentList . {
                                 print("annotation")
                                 return Dummy()
                         }
-*/
-/*
+
 qualifiedName           ::= simpleName KeywordColon KeywordColon simpleName . {
+                                print("qualifiedName")
                                 return Dummy()
                         }
-*/
+
 assignmentExpression    ::= postfixExpression . {
                                 print("assignmentExpression")
                                 return Dummy()
@@ -200,11 +200,22 @@ literalExpression       ::= floatingLiteral . {
                                 print("literal float")
                                 return Dummy()
                         }
-/*
-literalExpression       ::= stringLiteral . {
+
+literalExpression       ::= stringLiteral zeroOrMoreStringLiterals . {
+                                print("literalExpression")
                                 return Dummy()
                         }
-*/
+
+zeroOrMoreStringLiterals        ::= . {
+                                print("zero string literal")
+                                return Dummy()
+                        }
+
+zeroOrMoreStringLiterals        ::= stringLiteral zeroOrMoreStringLiterals . {
+                                print("stringLiteral+")
+                                return Dummy()
+                        }
+
 argumentList            ::= KeywordParenOpen positionalArguments KeywordParenClose . {
                                 print("argumentList")
                                 return Dummy()
@@ -219,14 +230,13 @@ positionalArguments     ::= positionalArgument . {
                                 print("one pos args")
                                 return Dummy()
                         }
-/*
+
 positionalArguments     ::= positionalArgument KeywordComma positionalArguments . {
                                 print("non-empty pos args")
                                 return Dummy()
                         }
-*/
+
 positionalArgument      ::= assignmentExpression . {
-//positionalArgument      ::= floatingLiteral . {
                                 print("positionalArgument")
                                 return Dummy()
                         }

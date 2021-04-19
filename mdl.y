@@ -13,26 +13,40 @@
 
 %nonterminal_type       root                    MdlVersion
 %nonterminal_type       mdl                     MdlVersion
-%nonterminal_type       mdl_version             MdlVersion
-%nonterminal_type       floating_literal        FloatingLiteral
+%nonterminal_type       mdlVersion              MdlVersion
+%nonterminal_type       floatingLiteral         FloatingLiteral
+%nonterminal_type       mdlImports              Import
 %nonterminal_type       mdlImport               Import
+%nonterminal_type       globalDeclaration       Dummy
 
-root            ::= mdl(a). {
+root            ::= mdl(a) . {
                         return a
                 }
 
-mdl             ::= mdl_version(a) mdlImport. {
+mdl             ::= mdlVersion(a) mdlImports KeywordExport globalDeclaration . {
                         return a
                 }
 
-mdl_version     ::= KeywordMdl floating_literal(a) KeywordSemicolon. {
+mdlVersion     ::= KeywordMdl floatingLiteral(a) KeywordSemicolon . {
                         return MdlVersion(x: a)
                 }
 
-mdlImport          ::= KeywordImport KeywordColon KeywordColon Identifier KeywordColon KeywordColon KeywordAsterisk KeywordSemicolon. {
+mdlImports      ::= . {
+                        return Import();
+                }
+
+mdlImports      ::= mdlImport mdlImports . {
                         return Import()
                 }
 
-floating_literal        ::= Integer KeywordDot Integer. {
+mdlImport       ::= KeywordImport KeywordColon KeywordColon Identifier KeywordColon KeywordColon KeywordAsterisk KeywordSemicolon . {
+                        return Import()
+                }
+
+floatingLiteral        ::= Integer KeywordDot Integer . {
                         return FloatingLiteral()
+                }
+
+globalDeclaration       ::= KeywordMaterial Identifier . {
+                        return Dummy()
                 }

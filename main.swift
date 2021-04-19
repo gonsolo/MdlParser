@@ -7,6 +7,7 @@ enum Expression {
 struct FloatingLiteral {}
 struct MdlVersion { let x: FloatingLiteral }
 struct Import {}
+struct Dummy {}
 
 let parser = MdlParser()
 
@@ -18,6 +19,8 @@ let lexer = CitronLexer<TokenData>(
                 // Keywords
                 .string("mdl",          (.keyword, .KeywordMdl)),
                 .string("import",       (.keyword, .KeywordImport)),
+                .string("export",       (.keyword, .KeywordExport)),
+                .string("material",     (.keyword, .KeywordMaterial)),
                 .string(":",            (.keyword, .KeywordColon)),
                 .string(".",            (.keyword, .KeywordDot)),
                 .string(";",            (.keyword, .KeywordSemicolon)),

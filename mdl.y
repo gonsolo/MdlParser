@@ -144,8 +144,7 @@ parameter               ::= type simpleName . {
                                 print("parameter")
                                 return Dummy()
                         }
-//parameter               ::= type simpleName KeywordEquals assignmentExpression /* annotationBlock */ . {
-parameter               ::= type simpleName KeywordEquals floatingLiteral /* annotationBlock */ . {
+parameter               ::= type simpleName KeywordEquals assignmentExpression /* annotationBlock */ . {
                                 print("parameter =")
                                 return Dummy()
                         }
@@ -173,12 +172,11 @@ qualifiedName           ::= simpleName KeywordColon KeywordColon simpleName . {
                                 return Dummy()
                         }
 */
-/*
-assignmentExpression    ::= postfixExpression . {
+//assignmentExpression    ::= postfixExpression . {
+assignmentExpression    ::= KeywordColor KeywordParenOpen floatingLiteral KeywordParenClose . {
                                 print("assignmentExpression")
                                 return Dummy()
                         }
-*/
 //postfixExpression       ::= primaryExpression /* argumentList */ . {
 //                                print("postfix")
 //                                return Dummy()

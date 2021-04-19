@@ -44,6 +44,7 @@
 %nonterminal_type       literalExpression       Dummy
 %nonterminal_type       positionalArguments     Dummy
 %nonterminal_type       positionalArgument      Dummy
+%nonterminal_type       expression              Dummy
 
 root                    ::= mdl(a) . {
                                 print("root")
@@ -86,7 +87,7 @@ globalDeclaration       ::= functionDeclaration . {
                                 return Dummy()
                         }
 
-functionDeclaration     ::= type simpleName KeywordParenOpen parameterList KeywordParenClose annotationBlock . {
+functionDeclaration     ::= type simpleName KeywordParenOpen parameterList KeywordParenClose annotationBlock KeywordEquals expression . {
                                 print("functionDeclaration")
                                 return Dummy()
                         }
@@ -233,5 +234,9 @@ positionalArguments     ::= positionalArgument KeywordComma positionalArguments 
 
 positionalArgument      ::= assignmentExpression . {
                                 print("positionalArgument")
+                                return Dummy()
+                        }
+
+expression              ::= KeywordLet . {
                                 return Dummy()
                         }

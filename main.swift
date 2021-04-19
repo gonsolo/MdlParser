@@ -23,6 +23,7 @@ let lexer = CitronLexer<TokenData>(
                 .string("uniform",      (.keyword, .KeywordUniform)),
                 .string("color",        (.keyword, .KeywordColor)),
                 .string("float",        (.keyword, .KeywordFloat)),
+                .string("let",          (.keyword, .KeywordLet)),
                 .string(":",            (.keyword, .KeywordColon)),
                 .string(";",            (.keyword, .KeywordSemicolon)),
                 .string("*",            (.keyword, .KeywordAsterisk)),

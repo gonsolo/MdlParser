@@ -109,6 +109,10 @@ parameterList           ::= parameter . {
                                 return Dummy()
                         }
 
+parameterList           ::= parameter KeywordComma parameterList . {
+                                return Dummy()
+                        }
+
 parameter               ::= type simpleName KeywordEquals assignmentExpression annotationBlock . {
                                 return Dummy()
                         }

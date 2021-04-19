@@ -32,6 +32,8 @@ let lexer = CitronLexer<TokenData>(
                 .string("=",            (.keyword, .KeywordEquals)),
                 .string("[",            (.keyword, .KeywordBracketOpen)),
                 .string("]",            (.keyword, .KeywordBracketClose)),
+                .string("{",            (.keyword, .KeywordBraceOpen)),
+                .string("}",            (.keyword, .KeywordBraceClose)),
                 .string(",",            (.keyword, .KeywordComma)),
 
                 // Numbers

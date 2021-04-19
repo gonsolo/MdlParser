@@ -45,6 +45,7 @@
 %nonterminal_type       positionalArguments     Dummy
 %nonterminal_type       positionalArgument      Dummy
 %nonterminal_type       expression              Dummy
+%nonterminal_type       letExpression           Dummy
 
 root                    ::= mdl(a) . {
                                 print("root")
@@ -237,6 +238,10 @@ positionalArgument      ::= assignmentExpression . {
                                 return Dummy()
                         }
 
-expression              ::= KeywordLet . {
+expression              ::= letExpression . {
+                                return Dummy()
+                        }
+
+letExpression            ::= KeywordLet KeywordBraceOpen KeywordBraceClose . {
                                 return Dummy()
                         }

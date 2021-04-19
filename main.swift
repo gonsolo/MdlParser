@@ -21,6 +21,8 @@ let lexer = CitronLexer<TokenData>(
                 .string("import",       (.keyword, .KeywordImport)),
                 .string("export",       (.keyword, .KeywordExport)),
                 .string("material",     (.keyword, .KeywordMaterial)),
+                .string("uniform",      (.keyword, .KeywordUniform)),
+                .string("color",        (.keyword, .KeywordColor)),
                 .string(":",            (.keyword, .KeywordColon)),
                 .string(".",            (.keyword, .KeywordDot)),
                 .string(";",            (.keyword, .KeywordSemicolon)),

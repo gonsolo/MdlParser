@@ -19,6 +19,12 @@
 %nonterminal_type       mdlImport               Import
 %nonterminal_type       globalDeclaration       Dummy
 %nonterminal_type       functionDeclaration     Dummy
+%nonterminal_type       type                    Dummy
+%nonterminal_type       simpleType              Dummy
+%nonterminal_type       frequencyQualifier      Dummy
+%nonterminal_type       simpleName              Dummy
+%nonterminal_type       parameterList           Dummy
+%nonterminal_type       parameter               Dummy
 
 root                    ::= mdl(a) . {
                                 return a
@@ -52,6 +58,45 @@ globalDeclaration       ::= functionDeclaration . {
                                 return Dummy()
                         }
 
-functionDeclaration       ::= KeywordMaterial Identifier KeywordParenOpen KeywordParenClose . {
+functionDeclaration     ::= type simpleName KeywordParenOpen parameterList KeywordParenClose . {
                                 return Dummy()
                         }
+
+type                    ::= simpleType . {
+                                return Dummy()
+                        }
+
+type                    ::= frequencyQualifier simpleType . {
+                                return Dummy()
+                        }
+
+frequencyQualifier      ::= KeywordUniform . {
+                                return Dummy()
+                        }
+
+simpleType              ::= KeywordMaterial . {
+                                return Dummy()
+                        }
+
+simpleType              ::= KeywordColor . {
+                                return Dummy()
+                        }
+
+simpleName              ::= Identifier . {
+                                return Dummy()
+                        }
+
+parameterList           ::= . {
+                                return Dummy()
+                        }
+
+parameterList           ::= parameter . {
+                                return Dummy()
+                        }
+
+parameter               ::= type . {
+                                return Dummy()
+                        }
+
+
+

@@ -94,7 +94,7 @@ parameterList           ::= parameter . {
                                 return Dummy()
                         }
 
-parameter               ::= type . {
+parameter               ::= type simpleName . {
                                 return Dummy()
                         }
 

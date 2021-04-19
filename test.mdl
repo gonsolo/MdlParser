@@ -33,17 +33,7 @@ import ::math::*;
 import ::base::*;
 import ::anno::*;
 
-
 export material gun_metal (
-    uniform color base_color  = color(0.08) 
-    [[ 
-        anno::display_name("Base color"),
-        anno::description("The base color of the material")
-    ]],
-    uniform float flake_amount        = .25
-    [[ 
-        anno::display_name("Flake Amount"),
-        anno::soft_range(0.0, 1.0),
-        anno::description("The amount of metal flakes in the material")
-    ]]
+     uniform color base_color = 0.0,
+     uniform color base_color = 0.0
 )

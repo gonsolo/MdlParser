@@ -29,8 +29,8 @@ let lexer = CitronLexer<TokenData>(
                 .string("(",            (.keyword, .KeywordParenOpen)),
                 .string(")",            (.keyword, .KeywordParenClose)),
                 .string("=",            (.keyword, .KeywordEquals)),
-                .string("[",            (.keyword, .KeywordBracketOpen)),
-                .string("]",            (.keyword, .KeywordBracketClose)),
+                //.string("[",            (.keyword, .KeywordBracketOpen)),
+                //.string("]",            (.keyword, .KeywordBracketClose)),
                 .string(",",            (.keyword, .KeywordComma)),
 
                 // Numbers
@@ -50,9 +50,9 @@ let lexer = CitronLexer<TokenData>(
                 }),
 
                 // String literal
-                .regexPattern("\"[A-Za-z ]+\"", { str in
-                        return (.string(str), .String)
-                }),
+                //.regexPattern("\"[A-Za-z ]+\"", { str in
+                //        return (.string(str), .String)
+                //}),
 
                 // Identifiers
                 .regexPattern("[a-zA-Z0-9_]+", { str in

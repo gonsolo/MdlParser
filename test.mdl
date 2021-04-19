@@ -43,6 +43,7 @@ export material gun_metal (
     uniform float flake_amount        = .25
     [[ 
         anno::display_name("Flake Amount"),
+        /* anno::soft_range(0.0, 1.0), */
         anno::description("The amount of metal flakes in the material")
     ]]
 )

@@ -24,16 +24,23 @@ let lexer = CitronLexer<TokenData>(
                 .string("uniform",      (.keyword, .KeywordUniform)),
                 .string("color",        (.keyword, .KeywordColor)),
                 .string(":",            (.keyword, .KeywordColon)),
-                .string(".",            (.keyword, .KeywordDot)),
                 .string(";",            (.keyword, .KeywordSemicolon)),
                 .string("*",            (.keyword, .KeywordAsterisk)),
                 .string("(",            (.keyword, .KeywordParenOpen)),
                 .string(")",            (.keyword, .KeywordParenClose)),
+                .string("=",            (.keyword, .KeywordEquals)),
 
                 // Numbers
-                .regexPattern("[0-9]+", { str in
-                        if let number = Int(str) {
-                                return (.integer(number), .Integer)
+                //.regexPattern("[0-9]+", { str in
+                //        if let number = Int(str) {
+                //                return (.integer(number), .Integer)
+                //        }
+                //        return nil
+                //}),
+
+                .regexPattern("[0-9]+\\.[0-9]+", { str in
+                        if let number = Float(str) {
+                                return (.float(number), .Float)
                         }
                         return nil
                 }),

@@ -5,6 +5,7 @@
                 case keyword            // mdl
                 case punctuation        // .
                 case integer(Int)
+                case float(Float)
                 case identifier(String)
         }
 }
@@ -25,6 +26,10 @@
 %nonterminal_type       simpleName              Dummy
 %nonterminal_type       parameterList           Dummy
 %nonterminal_type       parameter               Dummy
+%nonterminal_type       assignmentExpression    Dummy
+%nonterminal_type       postfixExpression       Dummy
+%nonterminal_type       primaryExpression       Dummy
+%nonterminal_type       argumentList            Dummy
 
 root                    ::= mdl(a) . {
                                 return a
@@ -50,9 +55,10 @@ mdlImport               ::= KeywordImport KeywordColon KeywordColon Identifier K
                                 return Import()
                         }
 
-floatingLiteral        ::= Integer KeywordDot Integer . {
+floatingLiteral        ::= Float . {
                                 return FloatingLiteral()
                         }
+
 
 globalDeclaration       ::= functionDeclaration . {
                                 return Dummy()
@@ -94,9 +100,25 @@ parameterList           ::= parameter . {
                                 return Dummy()
                         }
 
-parameter               ::= type simpleName . {
+parameter               ::= type simpleName KeywordEquals assignmentExpression . {
                                 return Dummy()
                         }
 
+assignmentExpression    ::= postfixExpression . {
+                                return Dummy()
+                        }
+//assignmentExpression    ::= type KeywordParenOpen floatingLiteral KeywordParenClose . {
+//                                return Dummy()
+//                        }
 
+postfixExpression       ::= primaryExpression argumentList . {
+                                return Dummy()
+                        }
 
+primaryExpression       ::= simpleType . {
+                                return Dummy()
+                        }
+
+argumentList            ::= KeywordParenOpen floatingLiteral KeywordParenClose . {
+                                return Dummy()
+                        }

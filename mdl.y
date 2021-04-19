@@ -163,6 +163,10 @@ literalExpression       ::= floatingLiteral . {
                                 return Dummy()
                         }
 
+literalExpression       ::= stringLiteral . {
+                                return Dummy()
+                        }
+
 argumentList            ::= . {
                                 return Dummy()
                         }
@@ -171,11 +175,7 @@ argumentList            ::= KeywordParenOpen positionalArgument KeywordParenClos
                                 return Dummy()
                         }
 
-positionalArgument      ::= floatingLiteral . {
-                                return Dummy()
-                        }
-
-positionalArgument      ::= stringLiteral. {
+positionalArgument      ::= assignmentExpression . {
                                 return Dummy()
                         }
 

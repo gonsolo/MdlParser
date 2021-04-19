@@ -15,7 +15,8 @@ e: edit
 edit:
 	#vi mdl.y
 	vi main.swift
-
+ey:
+	vi mdl.y
 c: clean
 clean:
 	rm -f mdl mdl.swift

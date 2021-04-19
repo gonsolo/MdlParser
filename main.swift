@@ -5,9 +5,8 @@ enum Expression {
 }
 
 struct FloatingLiteral {}
-struct MdlVersion {
-        let x: FloatingLiteral
-}
+struct MdlVersion { let x: FloatingLiteral }
+struct Import {}
 
 let parser = MdlParser()
 
@@ -17,9 +16,11 @@ let lexer = CitronLexer<TokenData>(
         rules: [
 
                 // Keywords
-                .string("mdl"   , (.keyword, .KeywordMdl)),
-                .string("."     , (.keyword, .KeywordDot)),
-                .string(";"     , (.keyword, .KeywordSemicolon)),
+                .string("mdl",          (.keyword, .KeywordMdl)),
+                .string("import",       (.keyword, .KeywordImport)),
+                .string(":",            (.keyword, .KeywordColon)),
+                .string(".",            (.keyword, .KeywordDot)),
+                .string(";",            (.keyword, .KeywordSemicolon)),
 
                 // Numbers
                 .regexPattern("[0-9]+", { str in

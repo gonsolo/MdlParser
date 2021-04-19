@@ -36,21 +36,22 @@ let lexer = CitronLexer<TokenData>(
                 .string("}",            (.keyword, .KeywordBraceClose)),
                 .string(",",            (.keyword, .KeywordComma)),
 
-                // Numbers
-                //.regexPattern("[0-9]+", { str in
-                //        if let number = Int(str) {
-                //                return (.integer(number), .Integer)
-                //        }
-                //        return nil
-                //}),
-
-                // Float literal
+                // Numbers like 0.1 or .17
                 .regexPattern("[0-9]*\\.[0-9]+", { str in
                         if let number = Float(str) {
                                 return (.float(number), .Float)
                         }
                         return nil
                 }),
+
+                // Numbers like 0 or 7
+                .regexPattern("[0-9]+", { str in
+                        if let number = Float(str) {
+                                return (.float(number), .Float)
+                        }
+                        return nil
+                }),
+
 
                 // String literal
                 .regexPattern("\"[0-9A-Za-z .',]+\"", { str in

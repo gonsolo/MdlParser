@@ -50,7 +50,7 @@ let lexer = CitronLexer<TokenData>(
                 }),
 
                 // String literal
-                .regexPattern("\"[A-Za-z .',]+\"", { str in
+                .regexPattern("\"[0-9A-Za-z .',]+\"", { str in
                         return (.string(str), .String)
                 }),
 

@@ -86,7 +86,7 @@ globalDeclaration       ::= functionDeclaration . {
                                 return Dummy()
                         }
 
-functionDeclaration     ::= type simpleName KeywordParenOpen parameterList KeywordParenClose . {
+functionDeclaration     ::= type simpleName KeywordParenOpen parameterList KeywordParenClose annotationBlock . {
                                 print("functionDeclaration")
                                 return Dummy()
                         }
@@ -220,12 +220,7 @@ argumentList            ::= KeywordParenOpen positionalArguments KeywordParenClo
                                 print("argumentList")
                                 return Dummy()
                         }
-/*
-argumentList            ::= . {
-                                print("empty argumentList")
-                                return Dummy()
-                        }
-*/
+
 positionalArguments     ::= positionalArgument . {
                                 print("one pos args")
                                 return Dummy()
